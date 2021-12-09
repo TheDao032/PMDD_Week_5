@@ -28,6 +28,7 @@ public class MainActivity extends FragmentActivity implements MainCallBacks{
     TextView tvUserGrade;
     TextView tvUserAverage;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +55,6 @@ public class MainActivity extends FragmentActivity implements MainCallBacks{
                 tvUserAverage.setText(user.getAverage().toString());
                 tvUserGrade.setText(user.getGrade().toString());
                 tvUserFullName.setText(user.getName());
-                System.out.println("test");
             }
         });
 
@@ -73,16 +73,22 @@ public class MainActivity extends FragmentActivity implements MainCallBacks{
     // MainCallback implementation (receiving messages coming from Fragments)
 
     @Override
-    public void onMsgFromFragToMain(String sender, String strValue) {
+    public void onUserFromFragToMain(User information, int position) {
         // show message arriving to MainActivity
-        System.out.println(sender);
-        Toast.makeText(getApplication(), " MAIN GOT>> " + sender + "\n" + strValue, Toast.LENGTH_LONG).show();
+        try { // forward blue-data to redFragment using its callback method
+            userInfoFragment.onUserFromMainToFragment(information, position);
+        } catch (Exception e) {
+            Log.e("ERROR", "onStrFromFragToMain " + e.getMessage());
+        }
+    }
 
-        if (sender.equals("userName")) {
-            try { // forward blue-data to redFragment using its callback method
-                userInfoFragment.onMsgFromMainToFragment(sender, strValue);
-            }
-            catch (Exception e) { Log.e("ERROR", "onStrFromFragToMain " + e.getMessage()); }
+    @Override
+    public void onPositionFromFragToMain(int position, int key) {
+        // show message arriving to MainActivity
+        try { // forward blue-data to redFragment using its callback method
+            listUserFragment.onPositionFromMainToFragment(position, key);
+        } catch (Exception e) {
+            Log.e("ERROR", "onStrFromFragToMain " + e.getMessage());
         }
     }
 }

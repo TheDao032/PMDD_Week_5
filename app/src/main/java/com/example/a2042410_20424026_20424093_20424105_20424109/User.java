@@ -11,7 +11,7 @@ public class User {
         this.average = 0.0;
     }
 
-    public User(String grade, String name, Double average){
+    public User(String name, String grade, Double average){
         this.grade = grade;
         this.name = name;
         this.average = average;

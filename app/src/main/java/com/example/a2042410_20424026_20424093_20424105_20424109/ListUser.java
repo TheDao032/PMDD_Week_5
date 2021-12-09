@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ListUser extends Fragment{
+public class ListUser extends Fragment implements FragmentCallBacks{
     // this fragment shows a ListView
     MainActivity main;
     Context context = null;
@@ -26,6 +26,7 @@ public class ListUser extends Fragment{
     private String items[] = {};
     UserAdapter userAdapter;
     ListView lvContact;
+    static int position;
     // convenient constructor(accept arguments, copy them to a bundle, binds bundle to fragment)
 
     public static ListUser newInstance(String strArg) {
@@ -76,12 +77,30 @@ public class ListUser extends Fragment{
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 // inform enclosing MainActivity of the row’s position just selected
 
-                main.onMsgFromFragToMain("userName", userAdapter.getItem(position).getName());
-                main.onMsgFromFragToMain("userGrade", userAdapter.getItem(position).getGrade());
-                main.onMsgFromFragToMain("userAverage", userAdapter.getItem(position).getAverage().toString());
+                main.onUserFromFragToMain(userAdapter.getItem(position), position);
 //                txtBlue.setText("Blue selected row=" + position);
         }});
         // do this for each row (ViewHolder-Pattern could be used for better performance!)
         return layout_list_user;
     }// onCreateView
+
+    @Override
+    public void onUserFromMainToFragment(User information, int position) {
+    }
+
+    @Override
+    public void onPositionFromMainToFragment(int position, int key) {
+        // Next
+        if (key == 1) {
+            this.position = position + 1;
+        } else if (key == 2) {
+            this.position = position - 1;
+        } else if (key == 3) {
+            this.position = 0;
+        } else if (key == 4) {
+            this.position = userAdapter.getCount() - 1;
+        }
+
+        main.onUserFromFragToMain(userAdapter.getItem(this.position), this.position);
+    }
 }

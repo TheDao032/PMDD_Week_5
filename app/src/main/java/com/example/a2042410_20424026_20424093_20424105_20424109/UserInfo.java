@@ -15,10 +15,13 @@ public class UserInfo extends Fragment implements FragmentCallBacks {
     TextView userName;
     TextView userGrade;
     TextView userAverage;
-    Button btnEnd;
+    Button btnLast;
     Button btnPrevious;
     Button btnNext;
-    Button btnBegin;
+    Button btnFirst;
+
+
+    static int position;
 
 
     public static UserInfo newInstance(String strArg1) {
@@ -47,31 +50,47 @@ public class UserInfo extends Fragment implements FragmentCallBacks {
         userGrade = (TextView) user_info.findViewById(R.id.tvUserGrade);
         userAverage = (TextView) user_info.findViewById(R.id.tvUserAverage);
 
-//        txtUserForm = (TextView) user_form.findViewById(R.id.textView1Red);
-        // show string argument supplied by constructor (if any!)
-//        try { Bundle arguments = getArguments(); txtRed.setText(arguments.getString("arg1", "")); }
-//        catch (Exception e) { Log.e("RED BUNDLE ERROR – ", "" + e.getMessage()); }
-//        // clicking the button changes the time displayed and sends a copy to MainActivity
-//        btnRedClock = (Button) user_form.findViewById(R.id.button1Red);
-//        btnRedClock.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String redMessage = "Red clock:\n" + new Date().toString();
-//                txtRed.setText(redMessage);
-//                main.onMsgFromFragToMain("RED-FRAG", redMessage);
-//        }});
+//        User user = new User(userName.getText().toString(), userGrade.getText().toString(), Double.parseDouble(userAverage.getText().toString()));
+
+        btnNext = (Button) user_info.findViewById(R.id.btnNext);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.onPositionFromFragToMain(position, 1);
+        }});
+
+        btnPrevious = (Button) user_info.findViewById(R.id.btnPrevious);
+        btnPrevious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.onPositionFromFragToMain(position, 2);
+        }});
+
+        btnFirst = (Button) user_info.findViewById(R.id.btnFirst);
+        btnFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.onPositionFromFragToMain(position, 3);
+        }});
+
+        btnLast = (Button) user_info.findViewById(R.id.btnLast);
+        btnLast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.onPositionFromFragToMain(position, 4);
+        }});
         return user_info;
     }
 
     @Override
-    public void onMsgFromMainToFragment(String key, String strValue) {
-        // receiving a message from MainActivity (it may happeTênn at any point in time)
-        if (key == "userName") {
-            userName.setText("Họ Tên:" + strValue);
-        } else if (key == "userGrade") {
-            userGrade.setText("Lớp:" + strValue);
-        } else {
-            userAverage.setText("Điểm trung bình:" + strValue);
-        }
+    public void onUserFromMainToFragment(User information, int position) {
+        userName.setText("Họ Tên:" + information.getName());
+        userGrade.setText("Lớp:" + information.getGrade());
+        userAverage.setText("Điểm trung bình:" + information.getAverage());
+        this.position = position;
+    }
+
+    @Override
+    public void onPositionFromMainToFragment(int position, int key) {
     }
 }
