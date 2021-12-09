@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    <fragment android:id="@+id/list_user"
+        android:name="com.example.a2042410_20424026_20424093_20424105_20424109.ListUser"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+    <fragment android:id="@+id/user_info"
+        android:name="com.example.a2042410_20424026_20424093_20424105_20424109.UserInfo"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2" />
+
+    </LinearLayout>
