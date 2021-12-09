@@ -35,11 +35,10 @@ public class UserInfo extends Fragment implements FragmentCallBacks {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Activities containing this fragment must implement interface: MainCallbacks
         if (!(getActivity() instanceof MainCallBacks)) {
             throw new IllegalStateException("Activity must implement MainCallbacks");
         }
-        main = (MainActivity) getActivity(); // use this reference to invoke main callbacks
+        main = (MainActivity) getActivity();
     }
 
     @Override
@@ -50,7 +49,6 @@ public class UserInfo extends Fragment implements FragmentCallBacks {
         userGrade = (TextView) user_info.findViewById(R.id.tvUserGrade);
         userAverage = (TextView) user_info.findViewById(R.id.tvUserAverage);
 
-//        User user = new User(userName.getText().toString(), userGrade.getText().toString(), Double.parseDouble(userAverage.getText().toString()));
 
         btnNext = (Button) user_info.findViewById(R.id.btnNext);
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +85,7 @@ public class UserInfo extends Fragment implements FragmentCallBacks {
         userName.setText("Họ Tên:" + information.getName());
         userGrade.setText("Lớp:" + information.getGrade());
         userAverage.setText("Điểm trung bình:" + information.getAverage());
+        System.out.println(information.getName());
         this.position = position;
     }
 

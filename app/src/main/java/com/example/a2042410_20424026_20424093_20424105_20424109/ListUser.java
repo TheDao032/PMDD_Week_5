@@ -58,31 +58,28 @@ public class ListUser extends Fragment implements FragmentCallBacks{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // inflate res/layout_blue.xml to make GUI holding a TextView and a ListView
         RelativeLayout layout_list_user = (RelativeLayout) inflater.inflate(R.layout.list_user, null);
 
-        // plumbing – get a reference to textview and listview
-//        final TextView txtBlue = (TextView) layout_blue.findViewById(R.id.textView1Blue);
         lvContact = (ListView) layout_list_user.findViewById(R.id.lvContact);
-//        listView.setBackgroundColor(Color.parseColor("#ffccddff"));
 
-        // define a simple adapter to fill rows of the listview
         lvContact.setAdapter(userAdapter);
-        // show listview from the top
         lvContact.setSelection(0); lvContact.smoothScrollToPosition(0);
-        // react to click events on listview’srows
 
         lvContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                // inform enclosing MainActivity of the row’s position just selected
-
                 main.onUserFromFragToMain(userAdapter.getItem(position), position);
-//                txtBlue.setText("Blue selected row=" + position);
         }});
-        // do this for each row (ViewHolder-Pattern could be used for better performance!)
         return layout_list_user;
-    }// onCreateView
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        this.position = 0;
+        main.onUserFromFragToMain(userAdapter.getItem(0), 0);
+    }
 
     @Override
     public void onUserFromMainToFragment(User information, int position) {

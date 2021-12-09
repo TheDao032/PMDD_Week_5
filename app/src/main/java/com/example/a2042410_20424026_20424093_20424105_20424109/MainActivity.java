@@ -42,9 +42,6 @@ public class MainActivity extends FragmentActivity implements MainCallBacks{
         userAdapter.add(new User("20HCB1", "Nguyễn Đoàn Tuấn Anh", 7.9));
 
         lvContact = (ListView) findViewById(R.id.lvContact);
-//        tvUserFullName = (TextView) findViewById(R.id.tvUserFullName);
-//        tvUserGrade = (TextView) findViewById(R.id.tvUserGrade);
-//        tvUserAverage = (TextView) findViewById(R.id.tvUserAverage);
 
         lvContact.setAdapter(userAdapter);
 
@@ -70,12 +67,10 @@ public class MainActivity extends FragmentActivity implements MainCallBacks{
         ft.commit();
     }
 
-    // MainCallback implementation (receiving messages coming from Fragments)
 
     @Override
     public void onUserFromFragToMain(User information, int position) {
-        // show message arriving to MainActivity
-        try { // forward blue-data to redFragment using its callback method
+        try {
             userInfoFragment.onUserFromMainToFragment(information, position);
         } catch (Exception e) {
             Log.e("ERROR", "onStrFromFragToMain " + e.getMessage());
@@ -84,8 +79,7 @@ public class MainActivity extends FragmentActivity implements MainCallBacks{
 
     @Override
     public void onPositionFromFragToMain(int position, int key) {
-        // show message arriving to MainActivity
-        try { // forward blue-data to redFragment using its callback method
+        try {
             listUserFragment.onPositionFromMainToFragment(position, key);
         } catch (Exception e) {
             Log.e("ERROR", "onStrFromFragToMain " + e.getMessage());

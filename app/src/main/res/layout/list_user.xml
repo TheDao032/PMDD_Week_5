@@ -6,57 +6,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/header"
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="Header"
-            android:textColor="#000"
-            android:textSize="20sp" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/body"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header"
-        android:gravity="center" >
-        <LinearLayout
+        android:layout_alignParentEnd="true"
+        android:fillViewport="true">
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <!--<TableRow>
-                    <TextView
-                        android:id="@+id/tvTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:padding="10dp"
-                        android:text="You choose:"
-                        android:textSize="20sp" />
-                </TableRow>-->
-                <TableRow>
-                    <ListView
-                        android:id="@+id/lvContact"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-                    </ListView>
-                </TableRow>
-            </TableLayout>
-        </LinearLayout>
-    </RelativeLayout>
+            android:layout_height="match_parent">
+            <TableRow>
+                <ListView
+                    android:id="@+id/lvContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"></ListView>
+            </TableRow>
+        </TableLayout>
+    </HorizontalScrollView>
+
 </RelativeLayout>
