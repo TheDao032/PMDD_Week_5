@@ -12,8 +12,14 @@ import android.widget.TextView;
 
 public class UserInfo extends Fragment implements FragmentCallBacks {
     MainActivity main;
-    TextView txtRed;
-    Button btnRedClock;
+    TextView userName;
+    TextView userGrade;
+    TextView userAverage;
+    Button btnEnd;
+    Button btnPrevious;
+    Button btnNext;
+    Button btnBegin;
+
 
     public static UserInfo newInstance(String strArg1) {
         UserInfo fragment = new UserInfo();
@@ -37,6 +43,10 @@ public class UserInfo extends Fragment implements FragmentCallBacks {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // inflate res/layout_red.xml which includes a textview and a button
         RelativeLayout user_info = (RelativeLayout) inflater.inflate(R.layout.user_info, null);
+        userName = (TextView) user_info.findViewById(R.id.tvUserName);
+        userGrade = (TextView) user_info.findViewById(R.id.tvUserGrade);
+        userAverage = (TextView) user_info.findViewById(R.id.tvUserAverage);
+
 //        txtUserForm = (TextView) user_form.findViewById(R.id.textView1Red);
         // show string argument supplied by constructor (if any!)
 //        try { Bundle arguments = getArguments(); txtRed.setText(arguments.getString("arg1", "")); }
@@ -54,8 +64,14 @@ public class UserInfo extends Fragment implements FragmentCallBacks {
     }
 
     @Override
-    public void onMsgFromMainToFragment(String strValue) {
-        // receiving a message from MainActivity (it may happen at any point in time)
-        txtRed.setText("THIS MESSAGE COMES FROM MAIN:" + strValue);
+    public void onMsgFromMainToFragment(String key, String strValue) {
+        // receiving a message from MainActivity (it may happeTênn at any point in time)
+        if (key == "userName") {
+            userName.setText("Họ Tên:" + strValue);
+        } else if (key == "userGrade") {
+            userGrade.setText("Lớp:" + strValue);
+        } else {
+            userAverage.setText("Điểm trung bình:" + strValue);
+        }
     }
 }

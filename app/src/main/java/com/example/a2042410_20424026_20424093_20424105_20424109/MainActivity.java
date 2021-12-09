@@ -77,10 +77,10 @@ public class MainActivity extends FragmentActivity implements MainCallBacks{
         // show message arriving to MainActivity
         System.out.println(sender);
         Toast.makeText(getApplication(), " MAIN GOT>> " + sender + "\n" + strValue, Toast.LENGTH_LONG).show();
-        if (sender.equals("RED-FRAG")) { /* TODO: if needed, do here something on behalf of the RED fragment*/ }
-        if (sender.equals("LIST_USER_FRAG")) {
+
+        if (sender.equals("userName")) {
             try { // forward blue-data to redFragment using its callback method
-                userInfoFragment.onMsgFromMainToFragment("\nSender: " + sender + "\nMsg: " + strValue);
+                userInfoFragment.onMsgFromMainToFragment(sender, strValue);
             }
             catch (Exception e) { Log.e("ERROR", "onStrFromFragToMain " + e.getMessage()); }
         }

@@ -70,11 +70,15 @@ public class ListUser extends Fragment{
         // show listview from the top
         lvContact.setSelection(0); lvContact.smoothScrollToPosition(0);
         // react to click events on listview’srows
+
         lvContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 // inform enclosing MainActivity of the row’s position just selected
-                main.onMsgFromFragToMain("LIST_USER_FRAG", "LIST_USER selected row=" + position);
+
+                main.onMsgFromFragToMain("userName", userAdapter.getItem(position).getName());
+                main.onMsgFromFragToMain("userGrade", userAdapter.getItem(position).getGrade());
+                main.onMsgFromFragToMain("userAverage", userAdapter.getItem(position).getAverage().toString());
 //                txtBlue.setText("Blue selected row=" + position);
         }});
         // do this for each row (ViewHolder-Pattern could be used for better performance!)

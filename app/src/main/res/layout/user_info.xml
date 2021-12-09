@@ -16,14 +16,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvClass"
+                android:id="@+id/tvCode"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="A1_1809"
                 android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/tvUserFullName"
+                android:id="@+id/tvUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Họ Tên: Lê Thị A"
